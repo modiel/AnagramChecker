@@ -43,43 +43,43 @@ namespace AnagramChecker
         public static void outputFile(string firstString, string secondString){
 
         // Create a string with a line of text.
-        string text = firstString + secondString + Environment.NewLine;
+        string text = firstString + " "+ secondString + Environment.NewLine;
 
         // Set a variable to the Documents path.
         string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
 
         // Write the text to a new file named "Anagram.txt".
         File.WriteAllText(Path.Combine(docPath, "Anagram.txt"), text);
-
         // Create a string array with the additional lines of text
         string[] lines = { firstString, secondString };
 
         //Ensure unique values are added to array
-        var distinctLines = lines.Distinct().ToArray();
+        var distinctLines = lines.Distinct().ToArray(); 
         
         //create file if it does not exist, append distinct values if it does
         if (!File.Exists(docPath)){
             
             File.Create(docPath).Close();
+
             // Append new lines of text to the file
             File.AppendAllLines(Path.Combine(docPath, "Anagram.txt"), distinctLines);
 
-        }
-
-            else if (File.Exists(docPath)){
+            if (File.Exists(docPath)){
                 // Append new lines of text to the file
                 File.AppendAllLines(Path.Combine(docPath, "Anagram.txt"), distinctLines);
 
             }
+        }
 
     }
 
-            public static void Main(string[] args)
-            {   
+        public static void Main(string[] args)
+        {   
 
                 //initialise variables
                 string? firstWord;
                 string? secondWord;
+    
 
                 //prompt user to create user name
                 Console.WriteLine("Welcome to the anagram checker!\n\nPlease enter a user name: ");
@@ -115,12 +115,11 @@ namespace AnagramChecker
                 else {  
                     Console.WriteLine($"No; {firstWord} and {secondWord} are not anagrams.");  
 
-                //write and append anagrams to file
+               
+                }  
+             //write and append anagrams to file
                 outputFile(firstWord, secondWord);      
             
-                }  
-
         }
-
     }
 }
